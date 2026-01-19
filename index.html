@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>우리학교 구글 계정 조회</title>
+
+  <link rel="stylesheet" href="./style.css" />
+</head>
+<body>
+  <main class="page">
+    <h1 class="title">우리학교 구글 계정 조회</h1>
+
+    <section class="panel">
+      <h2 class="h2">학생 정보 입력</h2>
+
+      <!-- 엔터로 제출 가능 -->
+      <form id="searchForm" autocomplete="off">
+        <div class="row">
+          <label class="field">
+            <span class="label">학번</span>
+            <input
+              id="studentNo"
+              name="studentNo"
+              type="text"
+              inputmode="numeric"
+              placeholder="예: 1101"
+              required
+            />
+          </label>
+
+          <label class="field">
+            <span class="label">이름</span>
+            <input
+              id="studentName"
+              name="studentName"
+              type="text"
+              placeholder="예: 홍길동"
+              required
+            />
+          </label>
+
+          <button id="btnSearch" type="submit">검색</button>
+        </div>
+
+        <p class="hint">
+          비밀번호는 보안상 화면에 표시하지 않습니다. 계정 확인 후 비밀번호 재설정 안내를 진행하세요.
+        </p>
+      </form>
+    </section>
+
+    <section class="panel" aria-live="polite">
+      <h2 class="h2">조회 결과</h2>
+
+      <!-- JS가 상태를 업데이트 -->
+      <div id="resultBox">
+        <p class="muted">학번과 이름을 입력한 뒤 검색하세요.</p>
+      </div>
+
+      <!-- (선택) 비밀번호 재설정 안내 버튼/링크 자리 -->
+      <div class="actions">
+        <button id="btnResetGuide" type="button">비밀번호 재설정 안내</button>
+      </div>
+    </section>
+
+    <footer class="footer">
+      <small class="muted">
+        ※ 개인정보 보호를 위해 조회 로그가 남을 수 있습니다.
+      </small>
+    </footer>
+  </main>
+
+  <!-- 다음 단계에서 JS/CSS를 붙일 예정 -->
+  <script defer src="./app.js"></script>
+</body>
+</html>
