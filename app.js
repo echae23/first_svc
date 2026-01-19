@@ -93,6 +93,11 @@ form.addEventListener("submit", (e) => {
   const studentNo = inputNo.value;
   const name = inputName.value;
 
+  // ✅ 디버그 로그 (개발자도구 Console에서 확인)
+  console.log("[INPUT RAW]", { studentNo, name });
+  console.log("[INPUT NORM]", { studentNo: normalize(studentNo), name: normalize(name) });
+  console.log("[ACCOUNTS]", ACCOUNTS);
+
   if (!normalize(studentNo) || !normalize(name)) {
     renderError("학번과 이름을 모두 입력하세요.");
     return;
@@ -108,4 +113,17 @@ form.addEventListener("submit", (e) => {
   renderSuccess(account);
 });
 
-btnResetGuide.addEventListener("click",
+btnResetGuide.addEventListener("click", () => {
+  alert(
+    [
+      "비밀번호 재설정 안내",
+      "",
+      "1) 계정 ID(이메일)을 확인합니다.",
+      "2) 학교/관리자 정책에 따라 다음 중 하나로 진행합니다:",
+      "   - 구글 비밀번호 재설정(본인 인증 기반)",
+      "   - 관리자 승인 후 임시 비밀번호 발급",
+      "3) 임시 비밀번호는 즉시 변경하도록 안내합니다.",
+    ].join("\n")
+  );
+});
+
