@@ -77,14 +77,32 @@ function renderSuccess(account) {
 }
 
 // ====== 검색 로직 ======
+// Inko 인스턴스 (CDN 로드 후 전역으로 Inko가 생김)
+const inko = new Inko();
+
+// ====== 검색 로직 ======
 function findAccount(studentNo, name) {
   const no = normalize(studentNo);
   const nm = normalize(name);
 
-  return ACCOUNTS.find(
+  // 1) 원본 그대로 검색
+  let found = ACCOUNTS.find(
     (a) => normalize(a.studentNo) === no && normalize(a.name) === nm
   );
+  if (found) return found;
+
+  // 2) 키보드 배열 실수(영타로 찍힌 한글)를 한글로 변환해서 재검색
+  const nm2 = normalize(inko.en2ko(nm));
+  if (nm2 !== nm) {
+    found = ACCOUNTS.find(
+      (a) => normalize(a.studentNo) === no && normalize(a.name) === nm2
+    );
+    if (found) return found;
+  }
+
+  return null;
 }
+
 
 // ====== 이벤트 ======
 form.addEventListener("submit", (e) => {
